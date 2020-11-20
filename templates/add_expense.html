@@ -1,0 +1,22 @@
+{% extends 'base.html' %} 
+ 
+{% block head %}
+    <title>Add expense</title>
+{% endblock %}
+    
+{% block body %}
+    <h1> Add expenses</h1>
+    <a href="/">Back to home</a>
+    <div class="content"> 
+        <form action="/expense" method="POST">
+            
+            <input type="text" name="date" id="date" placeholder="DD/MM/YY">
+            <input type="text" name="content" id="content" placeholder="Description">
+            <input type="text" name="value" id="value" placeholder="R$">
+            
+            <input type="submit" value="Add Despense">
+        </form>
+        
+        
+    </div>  
+{% endblock %}

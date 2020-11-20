@@ -8,7 +8,10 @@ db = SQLAlchemy(app)
 
 class Expenses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.String(10), nullable=False)
+    year = db.Column(db.String(4), nullable=False)
+    month = db.Column(db.String(2), nullable=False) 
+    date = db.Column(db.String(2), nullable=False)
+
     content = db.Column(db.String(200), nullable=False)
     value = db.Column(db.Float, default=0)
     #isFixed = db.Column(db.Boolean, default = False)
@@ -24,12 +27,12 @@ def index():
 @app.route("/expense", methods=['POST', 'GET'])
 def add_expense():
     if request.method == 'POST':
-        expense_date = request.form['date']
+        year, month, date = request.form['date'].split('-')
         expense_content = request.form['content']
         expense_value = request.form['value']
         #expense_isFixed = request.form['isFixed'] 
 
-        new_expense = Expenses(date=expense_date, content=expense_content, value=expense_value)# isFixed=expense_isFixed)
+        new_expense = Expenses(year=year, month=month, date=date, content=expense_content, value=expense_value)# isFixed=expense_isFixed)
 
         try:
             db.session.add(new_expense)
@@ -57,7 +60,8 @@ def update(id):
     expense = Expenses.query.get_or_404(id)
     
     if request.method == 'POST':
-        expense.date = request.form['date']
+        expense.year, expense.month, expense.date = request.form['date'].split('-')
+        #expense.date = request.form['date']
         expense.content = request.form['content']      
         expense.value = request.form['value']
 

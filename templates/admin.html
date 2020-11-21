@@ -1,0 +1,23 @@
+{% extends 'base.html' %} 
+ 
+{% block head %}
+    <title>Add expense</title>
+{% endblock %}
+    
+{% block body %}
+    <h1> Add categories</h1>
+    <a href="/">Back to home</a>
+    <div class="content"> 
+        
+        <form action="/admin" method="POST">
+            
+            <input type="text" name="parent-tag" id="parent-tag" placeholder="Parent">
+            <input type="text" name="child-tag" id="child-tag" placeholder="Child">
+            
+            <input type="submit" value="Add Category">
+        </form>
+        
+        {{categories}}
+         
+    </div>  
+{% endblock %}

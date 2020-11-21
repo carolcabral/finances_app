@@ -1,0 +1,19 @@
+{
+    "Alimentacao": [
+        "Supermercado",
+        "Teste"
+    ],
+    "Extra": [
+        "Cabelo",
+        "child",
+        "Supermercado"
+    ],
+    "Moradia": [
+        "Cabelo",
+        "child"
+    ],
+    "Lazer": [
+        "Cabelo",
+        "Cinema"
+    ]
+}

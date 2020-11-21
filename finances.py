@@ -2,6 +2,7 @@ from flask import Flask, render_template, url_for, request, redirect, session, f
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timedelta
 import pandas as pd
+import json
 
 from calculate import calculate_balance
 
@@ -13,6 +14,7 @@ db = SQLAlchemy(app)
 current_month = 11
 current_year = 2020
 
+categories = []
 class Expenses(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     year = db.Column(db.String(4), nullable=False)
@@ -126,6 +128,29 @@ def reports():
     balance = calculate_balance(expenses)
     return render_template('reports.html', month=report_month, year=report_year, balance=balance)
 
+@app.route("/admin", methods=['POST', 'GET'])
+def admin():
+    global categories
+    with open('categories.json', 'r') as f:
+        categories = json.loads(f.read())
+    
+    if request.method == 'POST':
+        print( "REQUEST FROM ADMIN")
+        print(request.form)
+        print ('CATEGORIES' + str(categories.keys()))
+        print ('PARENT:' + request.form['parent-tag'])
+        if request.form['parent-tag'] in categories.keys():
+            if request.form['child-tag'] not in categories[request.form['parent-tag']]:
+                #print("Filho ja adc")
+            #else:
+               categories[request.form['parent-tag']].append(request.form['child-tag']) 
+        else:
+            categories[request.form['parent-tag']] = []
+            categories[request.form['parent-tag']].append(request.form['child-tag'])
+
+        with open('categories.json', 'w') as f:
+            json.dump(categories, f, indent=4)  
+    return render_template('admin.html', categories = categories)
 
 if __name__ == "__main__":
 	db.create_all()

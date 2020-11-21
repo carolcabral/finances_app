@@ -15,6 +15,21 @@
             <input type="text" name="content" id="content" value="{{expense.content}}">
             <input type="text" name="value" id="value" value="{{expense.value}}">
             <input type="submit" value="Update expense">
+            <br>
+            <label for="category">Choose a category:</label>
+            <select name="category">
+                {% for key in categories|sort %}
+                <optgroup label="{{key}}">
+                    {% for item in categories[key] %}  
+
+                    <option value="{'{{key}}':'{{item}}'} ">{{item}} </option>
+                    {%endfor%}
+
+                </optgroup>
+                {% endfor %}
+
+            </select>   
+       
         </form>  
     </div>
 </div>

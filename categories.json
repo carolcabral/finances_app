@@ -1,7 +1,8 @@
 {
     "Alimentacao": [
         "Supermercado",
-        "Teste"
+        "Teste",
+        "supermercado"
     ],
     "Extra": [
         "Cabelo",
@@ -15,5 +16,8 @@
     "Lazer": [
         "Cabelo",
         "Cinema"
+    ],
+    "cozinha": [
+        "reforma"
     ]
 }

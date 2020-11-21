@@ -13,11 +13,21 @@
             
             <input type="text" name="parent-tag" id="parent-tag" placeholder="Parent">
             <input type="text" name="child-tag" id="child-tag" placeholder="Child">
-            
             <input type="submit" value="Add Category">
         </form>
         
-        {{categories}}
-         
+
+        <table>
+            {% for key in categories|sort %}
+                <tr> 
+                    <th>{{key}}</th>
+                </tr>            
+                {% for item in categories[key] %}
+                    <tr>
+                        <td>{{item}}</td>
+                    </tr>
+                {%endfor%}
+                {% endfor %}
+        </table>         
     </div>  
 {% endblock %}

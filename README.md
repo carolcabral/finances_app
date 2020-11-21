@@ -1,18 +1,7 @@
 
-- [x] Criar base de dados;
-- [x] Funções de adicionar, alterar e deletar despesas;
-- [x] Campo para despesas fixas
-- [x] Inserir data como calendário
-    - [x] Separar por mês (na base de dados e nas páginas)
-    - [x] Ordenar por data
-    - [x] Limitar meses até 12
-        - [ ] Otimizar limites
-    - [x] Armazenar valor da data no update
+
+
 - [ ] Add_revenue
-- [x] Tags e categorias como json
-    - [ ] Remover categorias
-    - [ ] Relacionar na base de dados e no cálculos
-    - [ ] Trasformar input in camelcase
 - [ ] Linkar página de update na linha inteira da tabela
 - [ ] Controle de erros
     - [ ] Flash message se campos não estiverem preenchidos
@@ -29,7 +18,20 @@
 
 ## Version control 
 
-20-nov | Input type data, isFixed, início de relatórios e categorias e bug fixes |
+20-nov | Input type data, isFixed, início de relatórios e categorias e bug fixes 
+- [x] Campo para despesas fixas
+- [x] Inserir data como calendário
+    - [x] Separar por mês (na base de dados e nas páginas)
+    - [x] Ordenar por data
+    - [x] Limitar meses até 12
+        - [ ] Otimizar limites
+    - [x] Armazenar valor da data no update
+    - [x] Tags e categorias como json
+    - [ ] Remover categorias
+    - [ ] Relacionar na base de dados e no cálculos
+    - [ ] Trasformar input in camelcase
 
-19-nov | Initial commit |
 
+19-nov | Initial commit 
+- [x] Criar base de dados;
+- [x] Funções de adicionar, alterar e deletar despesas;

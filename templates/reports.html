@@ -1,0 +1,32 @@
+
+{% extends 'base.html' %} 
+ 
+{% block head %}
+<title>Task Master</title>
+{% endblock %}
+    
+{% block body %}
+
+<h1> REPORTS</h1>
+<a href="/">Back to home</a>
+<div class="content"> 
+
+    <form action="/reports" method="POST">
+    <input type="month" name="report-from" id="report-from" placeholder="DD/MM/YY">
+    <!--<input type="month" name="report-to" id="report-from" placeholder="DD/MM/YY"> -->
+    <input type="submit" value="Generate report">
+    </form>
+
+
+    {% if balance %}
+    <h1> Your balance from {{ month}} / {{year}} is: R$ {{balance}}</h1>
+    {% else %}
+   
+    <h1> Provide data</h1>
+    
+
+    {% endif %}
+
+    </div>                
+
+{% endblock %}

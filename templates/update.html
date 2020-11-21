@@ -11,7 +11,7 @@
 
     <div class="form">
         <form action="/update/{{expense.id}}" method="POST">
-            <input type="date" name="date" id="date" value="{{expense.date}}">
+            <input type="date" name="date" id="date" value="{{expense.year}}-{{expense.month}}-{{expense.date}}">
             <input type="text" name="content" id="content" value="{{expense.content}}">
             <input type="text" name="value" id="value" value="{{expense.value}}">
             <input type="submit" value="Update expense">

@@ -1,0 +1,8 @@
+[default]
+SQLALCHEMY_DATABASE_URI = 'sqlite:///finances.db'
+TITLE = "MyFinances"
+#SECRET_KEY=''
+EXTENSIONS = [
+    "finances.ext.database:init_app",
+    "finances.blueprints.webui:init_app"
+]

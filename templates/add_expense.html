@@ -1,40 +1,158 @@
-{% extends 'base.html' %} 
- 
+{% extends 'base.html' %}
+
 {% block head %}
-    <title>Add expense</title>
+<title>Add new entry</title>
+<style>
+    .entry-wrapper {
+        width: 100%;
+        margin: 0 auto;
+
+    }
+
+    .entry-header {
+        text-align: left;
+
+    }
+
+    .entry-header button {
+        padding: 7px;
+        color: #52307c;
+        background-color: #b491c8;
+        border-radius: 10px;
+    }
+
+    .entry-content {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+
+
+    }
+
+    .entry-expense input,
+    .entry-revenue input {
+        padding: 10px;
+    }
+
+    #form-revenue {
+        display: none;
+    }
+
+    #form-expense {
+        display: block;
+    }
+</style>
+
+
 {% endblock %}
-    
+
 {% block body %}
-    <h1> Add expenses</h1>
-    <a href="/">Back to home</a>
-    <div class="content"> 
-        
-        <form action="/expense" method="POST">
-            
-            <input type="date" name="date" id="date" placeholder="DD/MM/YY">
-            <input type="text" name="content" id="content" placeholder="Description">
-            <input type="text" name="value" id="value" placeholder="R$">
-            <input type="checkbox" name="isFixed">Fixo
-            <br>
 
-            
-            <label for="category">Choose a category:</label>
-            <select name="category">
-                {% for key in categories|sort %}
-                <optgroup label="{{key}}">
-                    {% for item in categories[key] %}  
+<table class="entry-wrapper">
+    <tr>
+        <td>
+            <table class="entry-header">
+                <tr>
+                    <th><button id="btn-expense" onclick="show('expense')"> Expense</button></th>
+                    <th><button id="btn-revenue" onclick="show('revenue')"> Revenue</button></th>
+                </tr>
+            </table>
+        </td>
+    </tr>
 
-                    <option value="{'{{key}}':'{{item}}'} ">{{item}} </option>
-                    {%endfor%}
+    <!-- EXPENSE -->
 
-                </optgroup>
-                {% endfor %}
+    <tr>
+        <td>
+            <table class="entry-content">
 
-            </select>              
+                <div class="entry-expense" id="form-expense">
+                    <form action="/new-entry" method="POST">
+                        <h1> Add expenses</h1>
 
-            <input type="submit" value="Add Despense">
-        </form>
-        
-        
-    </div>  
+                        <input type="date" name="date" id="date" placeholder="DD/MM/YY">
+                        <input type="text" name="content" id="content" placeholder="Description">
+                        <br>
+                        <input type="text" name="value" id="value" placeholder="R$">
+                        <input type="checkbox" name="isFixed">Fixo
+                        <br>
+
+
+                        <label for="category">Choose a category:</label>
+                        <select name="category">
+                            {% for key in categories|sort %}
+                            <optgroup label="{{key}}">
+                                {% for item in categories[key] %}
+
+                                <option value="{'{{key}}':'{{item}}'} ">{{item}} </option>
+                                {%endfor%}
+
+                            </optgroup>
+                            {% endfor %}
+
+                        </select>
+
+                        <input type="submit" value="Add expense">
+                    </form>
+                </div>
+            </table>
+        </td>
+    </tr>
+
+    <!-- REVENUE -->
+    <tr>
+        <td>
+            <table class="entry-content">
+                <div class="entry-revenue" id="form-revenue">
+
+                    <form action="/new-entry" method="POST">
+                        <h1> Add revenue</h1>
+
+                        <input type="date" name="date" id="date" placeholder="DD/MM/YY">
+                        <input type="text" name="content" id="content" placeholder="Description">
+                        <br>
+                        <input type="text" name="value" id="value" placeholder="R$">
+                        <input type="checkbox" name="isFixed">Fixo
+                        <br>
+
+
+                        <label for="category">Choose a category:</label>
+                        <select name="category">
+                            {% for key in categories|sort %}
+                            <optgroup label="{{key}}">
+                                {% for item in categories[key] %}
+
+                                <option value="{'{{key}}':'{{item}}'} ">{{item}} </option>
+                                {%endfor%}
+
+                            </optgroup>
+                            {% endfor %}
+
+                        </select>
+
+                        <input type="submit" value="Add revenue">
+                    </form>
+                </div>
+            </table>
+        </td>
+    </tr>
+</table>
+
+<script>
+
+    function show(form) {
+        if (form == "revenue") {
+            document.getElementById("form-revenue").style.display = "block";
+            document.getElementById("form-expense").style.display = "none";
+
+        }
+        else {
+            document.getElementById("form-expense").style.display = "block";
+            document.getElementById("form-revenue").style.display = "none";
+
+        }
+    }
+
+</script>
+
 {% endblock %}

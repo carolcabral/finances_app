@@ -1,13 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <!--<link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">-->
     {% block head %} {% endblock %}
+
+    <style>
+        /* NAVBAR */
+        .nav-wrapper {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px;
+            text-transform: uppercase;
+
+        }
+
+        .left-side {
+            display: flex;
+
+        }
+
+        .nav-wrapper>.left-side>div {
+            margin-right: 20px;
+            color: red;
+
+        }
+
+        .nav-link-wrapper {
+            height: 22px;
+            border-bottom: 1px solid transparent;
+            transition: border-bottom 0.5s;
+        }
+
+        .nav-link-wrapper a {
+            color: #8a8a8a;
+            text-decoration: none;
+            transition: color 0.5s;
+        }
+
+        .nav-link-wrapper:hover {
+            border-bottom: 1px solid #3c1361;
+            color: #3c1361;
+        }
+
+        .nav-link-wrapper a:hover {
+            color: #3c1361;
+        }
+
+        .page-content {
+            width: 800px;
+            height: 100%;
+            margin: 0 auto;
+        }
+    </style>
 </head>
+
 <body>
-    {% block body %} {% endblock %}
+
+    <div class="nav-wrapper">
+        <div class="left-side">
+            <div class="nav-link-wrapper">
+                <a href="/">Agenda</a>
+            </div>
+            <div class="nav-link-wrapper">
+                <a href="/new-entry">New entry</a>
+            </div>
+
+            <div class="nav-link-wrapper">
+                <a href="/reports">Reports</a>
+            </div>
+        </div>
+
+        <div class="right-side">
+            <div class="nav-link-wrapper">
+                <a href="/admin" class="right-side">Add Categories</a>
+            </div>
+        </div>
+    </div>
+
+    <div class="page-content">
+        {% block body %} {% endblock %}
+    </div>
+
 </body>
+
 </html>

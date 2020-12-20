@@ -1,51 +1,168 @@
+{% extends 'base.html' %}
 
-{% extends 'base.html' %} 
- 
 {% block head %}
 <title>Task Master</title>
+
+<style>
+    .agenda-wrapper {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+    }
+
+    .agenda-header {
+        background-color: #52307c;
+        width: 100%;
+        margin: 0 auto;
+        justify-content: space-between;
+
+        color: white;
+        font-size: 18px;
+        padding: 10px;
+    }
+
+    .agenda-content {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .agenda-content tr:not(:first-child):hover {
+        background-color: #b491c8;
+    }
+
+    .agenda-footer {
+        width: 100%;
+        margin: 0 auto;
+        padding-top: 10px;
+        background-color: #bca0dc;
+        color: black;
+    }
+
+    .balance-estimated,
+    .balance-real {
+        width: 100%;
+        margin: 0 auto;
+        text-align: center;
+
+    }
+</style>
+
 {% endblock %}
-    
+
 {% block body %}
 
-<h1> HOME PAGE</h1>
-<a href="/expense">Add expense</a>
-<a href="/reports">Reports</a>
-<a href="/admin">Add Categories</a>
+<center>
+    <table class="agenda-wrapper">
 
-<div class="content">
-    <form action="/" method="POST">
-        <input type="submit" value="previous" name="current-month">
-        {% if expenses|length < 1 %}
-
-        <h4 style="text-align: center">Sem gastos ainda :) </h4>
-
-        {% else %}
-
-        <h3> {{expenses[0].month}} / {{expenses[0].year}}</h3>
-
-        {% endif %}
-        <input type="submit" value="next" name="current-month">
-    </form> 
-    <table>
         <tr>
-            <th>Date</th>
-            <th>Content</th>
-            <th>Value</th>
-            <th>Actions</th>
-            <th>É fixo</th>
+            <td>
+                <table class="agenda-header">
+                    <form action="/" method="POST">
+
+                        <tr>
+                            <th>
+                                <input type="submit" value="previous" name="current-month">
+                                <!--<a href=""><i class="fas fa-chevron-left"></i></a>-->
+                            </th>
+                            {% if expenses|length < 1 %}
+                            <h4 style="text-align: center">Sem gastos ainda :) </h4>
+                            {% else %}
+                            <th class="table-header"> {{expenses[0].month}} / {{expenses[0].year}}</th>
+                            {% endif %}
+
+                            <th>
+                                <input type="submit" value="next" name="current-month">
+                                <!--<a href=""><i class="fas fa-chevron-right"></i></a>-->
+                            </th>
+                        </tr>
+                    </form>
+
+                </table>
+            </td>
         </tr>
 
-        {% for item in expenses %}
-            <tr>
-                <td> {{item.date}}/{{item.month}}/{{item.year}}  </td>
-                <td> <a href="/update/{{item.id}}">{{item.content}}</a></td>
-                <td> {{item.value}} </td>
-                <td> <a href="/delete/{{item.id}}">Delete</a></td>
-                <td> {{item.isFixed}} </td>
-           </tr>
-        {% endfor %}
+        <tr>
+            <td>
+                <table class="agenda-content">
 
-    </table>  
-</div>                
+                    <tr>
+                        <th>Data</th>
+                        <th>Descrição</th>
+                        <th>Valor</th>
+                        <th>Ações</th>
+                        <th>É fixo?</th>
+                        <th>Situação</th>
+                    </tr>
 
+                    {% if expenses|length < 1 %}
+
+                    <h4 style="text-align: center">Sem gastos ainda :) </h4>
+
+                    {% else %}
+
+                    {% for item in expenses %}
+                    <tr>
+                        <td> {{item.date}}/{{item.month}}/{{item.year}} </td>
+                        <td> <a href="/update/{{item.id}}">{{item.content}}</a></td>
+                        <td> {{item.value}} </td>
+                        <td> <a href="/delete/{{item.id}}">Delete</a></td>
+                        <td> {{item.isFixed}} </td>
+                        <td> Check </td>
+                    </tr>
+                    {% endfor %}
+
+                    {% endif %}
+
+
+
+                </table>
+            </td>
+        </tr>
+
+
+        {% if expenses|length > 0 %}
+        <tr>
+            <td>
+                <table class="agenda-footer">
+                    <tr>
+                        <td>
+                            <table class="balance-estimated">
+                                <tr>
+                                    <td>Saldo previsto:</td>
+                                    <td>R$ 3000</td>
+                                </tr>
+                                <tr>
+                                    <td>Gasto previsto:</td>
+                                    <td>R$ -2000</td>
+                                </tr>
+                                <tr>
+                                    <td>Balanço previsto</td>
+                                    <td>R$ 1000</td>
+                                </tr>
+                            </table>
+                        </td>
+                        <td>
+                            <table class="balance-real">
+                                <tr>
+                                    <td>Saldo realizado:</td>
+                                    <td>R$ 3000</td>
+                                </tr>
+                                <tr>
+                                    <td>Gasto realizado:</td>
+                                    <td>R$ -2000</td>
+                                </tr>
+                                <tr>
+                                    <td>Balanço realizado</td>
+                                    <td>R$ 1000</td>
+                                </tr>
+
+                            </table>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+        {% endif %}
+    </table>
+</center>
 {% endblock %}
